@@ -175,12 +175,12 @@ vite是一个由原生ES Module驱动的Web开发工具，在开发环境基于�
 
 ## 对静态服务器index.js修改
 
-    const compilerSfc = require('@vue/compiler-sfc')
-    const compilerDom = require('@vue/compiler-dom')
+        const compilerSfc = require('@vue/compiler-sfc')
+        const compilerDom = require('@vue/compiler-dom')
 
 
-  //支持SFC组件， 单文件组件
-    else if(url.indexOf('.vue') > -1) {
+      //支持SFC组件， 单文件组件
+        else if(url.indexOf('.vue') > -1) {
         //第一步  vue文件需要一个编译 vue文件 => 分成template script两个部分 {compiler-sfc}
         const p = path.resolve(__dirname, url.split('?')[0].slice(1))
         const { descriptor } = compilerSfc.parse(fs.readFileSync(p,'utf-8'))
@@ -202,8 +202,8 @@ vite是一个由原生ES Module驱动的Web开发工具，在开发环境基于�
             ctx.type = 'application/javascript'
             // console.log('render:', render);
             ctx.body = rewriteImport(render.code)
-        }       
-    }
+            }       
+        }
 
 
 # CSS文件支持
