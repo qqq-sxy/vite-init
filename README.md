@@ -18,13 +18,13 @@ vite是一个由原生ES Module驱动的Web开发工具，在开发环境基于�
 能对首页的模块化进行实现
 ## 创建main.js文件，moduleA.js文件
 
-//main.js
-    import { str } from './moduleA.js'
-    console.log('vite ...' + str);
+    //main.js
+        import { str } from './moduleA.js'
+        console.log('vite ...' + str);
 
 
-//moduleA.js
-    export const str = '手写vite'
+    //moduleA.js
+        export const str = '手写vite'
 
 
 ## 创建一个简单的静态服务
