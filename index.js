@@ -8,10 +8,11 @@ const app = new Koa()
 //提供静态服务
 app.use(async ctx => {
     const { url, query } = ctx.request
-    console.log('url: ' + url);
-    //  / => index.html
+    // console.log('url: ' + url);
+    // 当加载首页
     if(url === '/') {
         ctx.type = 'text/html'
+        //以同步的方式读取文件
         let content = fs.readFileSync('./index.html', 'utf-8')
         
         //入口文件加入环境变量
@@ -29,8 +30,10 @@ app.use(async ctx => {
 
 
     // * => src/*.js
+    //如何是以endsWith结尾的
     else if(url.endsWith('.js')) {
         // /src/main.js =》 代码文件所在位置/src/main.js
+        //__dirname总是指向被执行js文件的绝对路径
         const p = path.resolve(__dirname,url.slice(1))
         const content = fs.readFileSync(p, 'utf-8')
         ctx.type = 'application/javascript'
@@ -43,6 +46,7 @@ app.use(async ctx => {
         //引入到  node_modules/vue/ 的es模块入口
         //读取package.json的module属性
         const prefix = path.resolve(__dirname, 'node_modules', url.replace('/@modules/', ""))
+  
 
         const module = require(prefix + '/package.json').module
         //dist/vue.runtime.esm-bundler.js
@@ -59,6 +63,7 @@ app.use(async ctx => {
     else if(url.indexOf('.vue') > -1) {
         //第一步  vue文件需要一个编译 vue文件 => 分成template script两个部分 {compiler-sfc}
         const p = path.resolve(__dirname, url.split('?')[0].slice(1))
+
         const { descriptor } = compilerSfc.parse(fs.readFileSync(p,'utf-8'))
         // console.log('descriptor:', descriptor );
         if(!query.type) {
@@ -85,6 +90,7 @@ app.use(async ctx => {
     //css文件
     else if(url.endsWith('.css')) {
         const p = path.resolve(__dirname, url.slice(1))
+
         const file = fs.readFileSync(p, 'utf-8')
 
 
