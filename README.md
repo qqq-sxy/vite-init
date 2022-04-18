@@ -67,22 +67,22 @@ vite是一个由原生ES Module驱动的Web开发工具，在开发环境基于�
 ## 下载vue
 
 ## 将main.js文件改为
-import { createApp, h} from 'vue'
+    import { createApp, h} from 'vue'
 
-const App = {
-    render() {
-        //<div><div>Hello Vite</div></div>
-        return h('div', null, [h('div'), String('Hello Vite')])
+    const App = {
+        render() {
+            //<div><div>Hello Vite</div></div>
+            return h('div', null, [h('div'), String('Hello Vite')])
+        }
     }
-}
 
 
 ## 在index.html文件添加
-<div id="app"></div>
+    <div id="app"></div>
 
 
 ## 静态服务器文件index.js添加
- //第三方库的支持   //vue => node_modules/***
+    //第三方库的支持   //vue => node_modules/***
      else if(url.startsWith('/@modules')) {
         //引入到  node_modules/vue/ 的es模块入口
         //读取package.json的module属性
@@ -96,7 +96,7 @@ const App = {
         //不一定保证vue中加载其他第三方的库
         ctx.body = rewriteImport(ret)
 
-}
+    }
 
 ## 因为vue库中的可能还在加载其他第三方的库所以写一个重写函数
 
@@ -136,41 +136,41 @@ const App = {
 # Vue单页文件支持
 ## 在src下创建一个App.vue文件
 
-<template>
-   <div>
-        <h1>我是单文件组件</h1>
-        <h2>
-            <span>count is {{count}}</span>
-            <button @click="count++">+1</button>
-        </h2>
-   </div>
-</template>
+    <template>
+       <div>
+            <h1>我是单文件组件</h1>
+            <h2>
+                <span>count is {{count}}</span>
+                <button @click="count++">+1</button>
+            </h2>
+       </div>
+    </template>
 
-<script>
-    import { ref } from 'vue'
-    export default {
-        setup() {
-            const count = ref(6)
-            function add() {
-                count.value ++
+    <script>
+        import { ref } from 'vue'
+        export default {
+            setup() {
+                const count = ref(6)
+                function add() {
+                    count.value ++
+                }
+
+                return { count }
             }
-
-            return { count }
         }
-    }
-</script>
+    </script>
 
 ##  对main.js文件进行修改
-import { createApp, h} from 'vue'
-import App from './App.vue'
-// const App = {
-//     render() {
-//         //<div><div>Hello Vite</div></div>
-//         return h('div', null, [h('div'), String('Hello Vite')])
-//     }
-// }
+    import { createApp, h} from 'vue'
+    import App from './App.vue'
+    // const App = {
+    //     render() {
+    //         //<div><div>Hello Vite</div></div>
+    //         return h('div', null, [h('div'), String('Hello Vite')])
+    //     }
+    // }
 
-createApp(App).mount('#app')
+    createApp(App).mount('#app')
 
 
 ## 对静态服务器index.js修改
@@ -208,12 +208,12 @@ createApp(App).mount('#app')
 
 # CSS文件支持
 ## 新建一个入口文件 index.css
-h1 {color: red;}
+    h1 {color: red;}
 ## 在入口文件中引入index.css
 
 
 ## 在静态服务器index.js中加入代码
-//css文件
+    //css文件
     else if(url.endsWith('.css')) {
         const p = path.resolve(__dirname, url.slice(1))
         const file = fs.readFileSync(p, 'utf-8')
